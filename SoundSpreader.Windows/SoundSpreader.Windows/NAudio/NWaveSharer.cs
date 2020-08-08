@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,12 +26,29 @@ namespace SoundSpreader.Windows.NAudio
 
         public void Load(string path)
         {
-
+            if(!File.Exists(path))
+            {
+                return;
+            }
+            lock (waveables) {
+                foreach (var data in File.ReadAllLines(path))
+                {
+                    if(data.StartsWith("LocalWaveable"))
+                    {
+                        waveables.Add(LocalWaveable.Load(data));
+                    }
+                }
+            }
         }
 
         public void Save(string path)
         {
-
+            var writer = new StreamWriter(path);
+            foreach(var waveable in waveables)
+            {
+                writer.WriteLine(waveable.Save());
+            }
+            writer.Close();
         }
 
         public void PushData(byte[] b, int len, WaveFormat format)

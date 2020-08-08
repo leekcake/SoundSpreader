@@ -40,7 +40,7 @@ namespace SoundSpreader.Windows
             capture.StartRecording();
 
             sharer = new NWaveSharer();
-
+            sharer.Load("waveables.txt");
             RefreshDeviceList();
 
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -100,11 +100,41 @@ namespace SoundSpreader.Windows
             }
             var waveable = new LocalWaveable(device.ID, device.FriendlyName);
             sharer.RegisterWaveable(waveable);
+            sharer.Save("waveables.txt");
         }
 
         private void RefreshDeviceButton_Click(object sender, RoutedEventArgs e)
         {
             RefreshDeviceList();
+        }
+
+        private void LatencySilder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (ReceiverListBox.SelectedIndex != -1)
+            {
+                var waveable = sharer.waveables[ReceiverListBox.SelectedIndex];
+                waveable.Latency = (int)e.NewValue;
+            }
+        }
+
+        private void VolumeSilder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (ReceiverListBox.SelectedIndex != -1)
+            {
+                var waveable = sharer.waveables[ReceiverListBox.SelectedIndex];
+                waveable.Volume = (float)(e.NewValue / 100);
+            }
+        }
+
+        private void ReceiverListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ReceiverListBox.SelectedIndex != -1)
+            {
+                var waveable = sharer.waveables[ReceiverListBox.SelectedIndex];
+                SelectedReceiverTextBox.Text = $"선택된 리시버: {waveable.Summary}";
+                LatencySilder.Value = waveable.Latency;
+                VolumeSilder.Value = waveable.Volume * 100;
+            }
         }
     }
 }

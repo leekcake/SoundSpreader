@@ -7,10 +7,16 @@
         mc:Ignorable="d"
         Title="Sound Spreader Sender" Height="517" Width="800">
     <Grid>
-        <ListBox x:Name="ReceiverListBox" HorizontalAlignment="Left" Height="340" Margin="10,135,0,0" VerticalAlignment="Top" Width="767"/>
+        <ListBox x:Name="ReceiverListBox" HorizontalAlignment="Left" Height="340" Margin="10,135,0,0" VerticalAlignment="Top" Width="767" SelectionChanged="ReceiverListBox_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,119,0,0" TextWrapping="Wrap" Text="등록된 리시버 목록" VerticalAlignment="Top"/>
         <ComboBox x:Name="DeviceListComboBox" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="579"/>
         <Button x:Name="RegisterDeviceButton" Click="RegisterDeviceButton_Click" Content="로컬 장치 등록" HorizontalAlignment="Left" Margin="688,10,0,0" VerticalAlignment="Top" Width="89" Height="25"/>
         <Button x:Name="RefreshDeviceButton" Click="RefreshDeviceButton_Click" Content="로컬 장치 갱신" HorizontalAlignment="Left" Margin="594,10,0,0" VerticalAlignment="Top" Width="89" Height="25"/>
+        <TextBlock x:Name="SelectedReceiverTextBox" HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="선택된 리시버: 없음" VerticalAlignment="Top"/>
+        <Button x:Name="RegisterRemoteDeviceButton" Content="외부 장치 등록" HorizontalAlignment="Left" Margin="688,40,0,0" VerticalAlignment="Top" Width="89" Height="25"/>
+        <Label Content="지연 시간: " HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="LatencySilder" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" HorizontalAlignment="Left" Margin="79,65,0,0" VerticalAlignment="Top" Height="22" Width="604" Maximum="1000" ValueChanged="LatencySilder_ValueChanged"/>
+        <Label Content="볼륨: " HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="VolumeSilder" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" HorizontalAlignment="Left" Margin="56,96,0,0" VerticalAlignment="Top" Height="22" Width="627" Maximum="100" ValueChanged="VolumeSilder_ValueChanged"/>
     </Grid>
 </Window>

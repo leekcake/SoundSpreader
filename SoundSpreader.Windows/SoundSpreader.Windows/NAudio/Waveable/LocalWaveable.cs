@@ -15,6 +15,10 @@ namespace SoundSpreader.Windows.NAudio.Waveable
         private WasapiOut output;
         private BufferedWaveProvider bufferedWaveProvider;
 
+        private int creationLatency = 0;
+        public override int Latency { get; set; } = 10;
+        public override float Volume { get; set; } = 1;
+
         public readonly string DeviceID;
         public readonly string FriendlyName;
 
@@ -46,7 +50,21 @@ namespace SoundSpreader.Windows.NAudio.Waveable
             }
         }
 
-        protected override string RestoreData => $"{DeviceID}/-_-\\{FriendlyName}";
+        protected override string RestoreData => $"{DeviceID}<b>{FriendlyName}";
+
+        protected override string RestoreHeader => "LocalWaveable";
+
+        public static LocalWaveable Load(string data)
+        {
+            var split = Split(data);
+            var resplit = split[3].Split(new string[] { "<b>" }, StringSplitOptions.RemoveEmptyEntries);
+            var result = new LocalWaveable(resplit[0], resplit[1]);
+
+            result.Latency = int.Parse(split[1]);
+            result.Volume = float.Parse(split[2]);
+
+            return result;
+        }
 
         public override void PushData(byte[] b, int length, WaveFormat format)
         {
@@ -62,14 +80,34 @@ namespace SoundSpreader.Windows.NAudio.Waveable
                 }
             }
 
+            if(creationLatency != Latency && output != null)
+            {
+                try
+                {
+                    output.Dispose();
+                }
+                catch
+                {
+
+                }
+                output = null;
+                return;
+            }
+
             if(output == null)
             {
-                output = new WasapiOut(device, AudioClientShareMode.Shared, false, 10);
+                creationLatency = Latency;
+                output = new WasapiOut(device, AudioClientShareMode.Shared, false, Latency);
                 output.Init(bufferedWaveProvider);
                 output.Play();
             }
 
-            if(output != null && output.PlaybackState == PlaybackState.Playing)
+            if (Volume != output.Volume)
+            {
+                output.Volume = Volume;
+            }
+
+            if (output != null && output.PlaybackState == PlaybackState.Playing)
             {
                 bufferedWaveProvider.AddSamples(b, 0, length);
             }
