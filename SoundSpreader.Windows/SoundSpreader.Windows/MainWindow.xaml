@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Sound Spreader Sender" Height="517" Width="800">
     <Grid>
-        <ListBox x:Name="ReceiverListBox" HorizontalAlignment="Left" Height="340" Margin="10,135,0,0" VerticalAlignment="Top" Width="767" SelectionChanged="ReceiverListBox_SelectionChanged"/>
+        <ListBox x:Name="ReceiverListBox" HorizontalAlignment="Left" Height="340" Margin="10,135,0,0" VerticalAlignment="Top" Width="767" SelectionChanged="ReceiverListBox_SelectionChanged" MouseDoubleClick="ReceiverListBox_MouseDoubleClick"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,119,0,0" TextWrapping="Wrap" Text="등록된 리시버 목록" VerticalAlignment="Top"/>
         <ComboBox x:Name="DeviceListComboBox" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="579"/>
         <Button x:Name="RegisterDeviceButton" Click="RegisterDeviceButton_Click" Content="로컬 장치 등록" HorizontalAlignment="Left" Margin="688,10,0,0" VerticalAlignment="Top" Width="89" Height="25"/>

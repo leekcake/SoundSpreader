@@ -136,5 +136,17 @@ namespace SoundSpreader.Windows
                 VolumeSilder.Value = waveable.Volume * 100;
             }
         }
+
+        private void ReceiverListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ReceiverListBox.SelectedIndex != -1)
+            {
+                var waveable = sharer.waveables[ReceiverListBox.SelectedIndex];
+                if ( MessageBox.Show($"{waveable.Summary} 장치를 지울까요?", "삭제?", MessageBoxButton.YesNo) == MessageBoxResult.Yes )
+                {
+                    sharer.UnregisterWaveable(waveable);
+                }
+            }
+        }
     }
 }

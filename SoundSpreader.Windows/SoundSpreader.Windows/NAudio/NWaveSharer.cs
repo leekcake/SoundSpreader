@@ -24,6 +24,14 @@ namespace SoundSpreader.Windows.NAudio
             }
         }
 
+        public void UnregisterWaveable(BaseWaveable waveable)
+        {
+            lock(waveables)
+            {
+                waveables.Remove(waveable);
+            }
+        }
+
         public void Load(string path)
         {
             if(!File.Exists(path))
