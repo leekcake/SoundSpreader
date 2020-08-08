@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SoundSpreader.Windows.NAudio.Waveable
 {
-    public class LocalWaveable : IWaveable
+    public class LocalWaveable : BaseWaveable
     {
         private MMDevice device;
         
@@ -24,7 +24,7 @@ namespace SoundSpreader.Windows.NAudio.Waveable
             FriendlyName = friendlyName;
         }
 
-        public string Summary {
+        public override string Summary {
             get
             {
                 if (bufferedWaveProvider == null)
@@ -46,9 +46,9 @@ namespace SoundSpreader.Windows.NAudio.Waveable
             }
         }
 
-        public string RestoreData => $"{DeviceID}/-_-\\{FriendlyName}";
+        protected override string RestoreData => $"{DeviceID}/-_-\\{FriendlyName}";
 
-        public void PushData(byte[] b, int length, WaveFormat format)
+        public override void PushData(byte[] b, int length, WaveFormat format)
         {
             if (bufferedWaveProvider == null) {
                 bufferedWaveProvider = new BufferedWaveProvider(format);

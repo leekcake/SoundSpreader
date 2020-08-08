@@ -29,9 +29,6 @@ namespace SoundSpreader.Windows
     {
         private NWaveSharer sharer;
 
-        private float[] volumeAvarage = new float[4];
-        private int volumeAvarageInx = 0;
-
         private DispatcherTimer timer = new DispatcherTimer();
         private WasapiLoopbackCapture capture;
 
@@ -80,16 +77,6 @@ namespace SoundSpreader.Windows
                 }
             }
             DeviceListComboBox.ItemsSource = list;
-        }
-
-        private float AvarageArray(float[] array)
-        {
-            float avarage = 0;
-            foreach(var value in array)
-            {
-                avarage += value;
-            }
-            return avarage / array.Length;
         }
 
         private void Capture_DataAvailable(object sender, WaveInEventArgs e)

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace SoundSpreader.Windows.NAudio.Waveable
 {
-    public interface IWaveable
+    public abstract class BaseWaveable
     {
-        void PushData(byte[] b, int length, WaveFormat format);
+        public abstract void PushData(byte[] b, int length, WaveFormat format);
 
-        string Summary
+        public abstract string Summary
         {
             get;
         }
 
-        string RestoreData
+        protected abstract string RestoreData
         {
             get;
         }

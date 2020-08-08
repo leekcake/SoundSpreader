@@ -14,13 +14,23 @@ namespace SoundSpreader.Windows.NAudio
     /// </summary>
     public class NWaveSharer
     {
-        public readonly List<IWaveable> waveables = new List<IWaveable>();
-        public void RegisterWaveable(IWaveable waveable)
+        public readonly List<BaseWaveable> waveables = new List<BaseWaveable>();
+        public void RegisterWaveable(BaseWaveable waveable)
         {
             lock(waveables)
             {
                 waveables.Add(waveable);
             }
+        }
+
+        public void Load(string path)
+        {
+
+        }
+
+        public void Save(string path)
+        {
+
         }
 
         public void PushData(byte[] b, int len, WaveFormat format)
