@@ -44,6 +44,9 @@ namespace SoundSpreader.Windows.NAudio
                     if(data.StartsWith("LocalWaveable"))
                     {
                         waveables.Add(LocalWaveable.Load(data));
+                    } else if(data.StartsWith("RemoteWaveable"))
+                    {
+                        waveables.Add(RemoteWaveable.Load(data));
                     }
                 }
             }

@@ -36,6 +36,7 @@ namespace SoundSpreader.Windows
         {
             InitializeComponent();
             capture = new WasapiLoopbackCapture();
+            Console.WriteLine(capture.WaveFormat);
             capture.DataAvailable += Capture_DataAvailable;
             capture.StartRecording();
 
@@ -145,8 +146,16 @@ namespace SoundSpreader.Windows
                 if ( MessageBox.Show($"{waveable.Summary} 장치를 지울까요?", "삭제?", MessageBoxButton.YesNo) == MessageBoxResult.Yes )
                 {
                     sharer.UnregisterWaveable(waveable);
+                    sharer.Save("waveables.txt");
                 }
             }
+        }
+
+        private void RegisterRemoteDeviceButton_Click(object sender, RoutedEventArgs e)
+        {
+            var waveable = new RemoteWaveable("192.168.0.239");
+            sharer.RegisterWaveable(waveable);
+            sharer.Save("waveables.txt");
         }
     }
 }

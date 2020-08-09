@@ -13,7 +13,7 @@
         <Button x:Name="RegisterDeviceButton" Click="RegisterDeviceButton_Click" Content="로컬 장치 등록" HorizontalAlignment="Left" Margin="688,10,0,0" VerticalAlignment="Top" Width="89" Height="25"/>
         <Button x:Name="RefreshDeviceButton" Click="RefreshDeviceButton_Click" Content="로컬 장치 갱신" HorizontalAlignment="Left" Margin="594,10,0,0" VerticalAlignment="Top" Width="89" Height="25"/>
         <TextBlock x:Name="SelectedReceiverTextBox" HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="선택된 리시버: 없음" VerticalAlignment="Top"/>
-        <Button x:Name="RegisterRemoteDeviceButton" Content="외부 장치 등록" HorizontalAlignment="Left" Margin="688,40,0,0" VerticalAlignment="Top" Width="89" Height="25"/>
+        <Button x:Name="RegisterRemoteDeviceButton" Content="외부 장치 등록" HorizontalAlignment="Left" Margin="688,40,0,0" VerticalAlignment="Top" Width="89" Height="25" Click="RegisterRemoteDeviceButton_Click"/>
         <Label Content="지연 시간: " HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
         <Slider x:Name="LatencySilder" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" HorizontalAlignment="Left" Margin="79,65,0,0" VerticalAlignment="Top" Height="22" Width="604" Maximum="1000" ValueChanged="LatencySilder_ValueChanged"/>
         <Label Content="볼륨: " HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
